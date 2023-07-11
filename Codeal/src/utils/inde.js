@@ -22,4 +22,4 @@ export const API_URLS = {
   searchUsers: (searchText) => `${API_ROOT}/users/search?text=${searchText}`,
 };
 
-export const Local_Storage_TOKEN_KEY = "____codeal____";
+export const Local_Storage_TOKEN_KEY = "__codeial_token__";
