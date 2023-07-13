@@ -1,5 +1,7 @@
 import { getPost } from "../api";
 import {useEffect} from 'react'
+import { Navbar } from "./Navbar";
+import {Home} from  '../Pages/Home'
 function App() {
 useEffect(()=>{
 let fetchPosts = async ()=>{
@@ -10,7 +12,8 @@ fetchPosts();
 },[])
   return (
     <div className="App">
-    Hello
+   <Navbar/>
+   <Home/>
     </div>
   );
 }

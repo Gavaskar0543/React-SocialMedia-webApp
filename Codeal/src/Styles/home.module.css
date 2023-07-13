@@ -1,0 +1,15 @@
+.outer{
+    height:20rem;
+    width:55%;
+    margin-top: 5%;
+    margin-left:3%;
+    border:1px solid black;
+}
+.username{
+    font-size: medium;
+    font-family: cursive;
+    margin-left: 3%;
+    margin-top:2%;
+    font-weight: 400
+    ;
+}
