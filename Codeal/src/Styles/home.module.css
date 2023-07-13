@@ -1,15 +1,20 @@
-.outer{
-    height:20rem;
-    width:55%;
-    margin-top: 5%;
-    margin-left:3%;
+.container{
+    height:15rem;
+    width:50%;
     border:1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left:2%;
 }
-.username{
-    font-size: medium;
-    font-family: cursive;
-    margin-left: 3%;
-    margin-top:2%;
-    font-weight: 400
-    ;
+.userInfo{
+  display:flex;
+  align-items: center;
+
+}
+.likeAndComments{
+    display: flex;
+    width:30%;
+    justify-content: space-evenly;
+    align-items: center;
 }
