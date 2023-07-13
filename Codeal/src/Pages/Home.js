@@ -14,8 +14,8 @@ export const Home = () => {
         display post
         </div>
         <div>
-            <h1>like</h1>
-            <h1>comment</h1>
+            <h3>like</h3>
+            <h3>comment</h3>
         </div>
         <div>
             <input type="text"  placeholder="leave comments"/>
