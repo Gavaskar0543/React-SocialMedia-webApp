@@ -1,8 +1,8 @@
 import { getPost } from "../api";
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
 import { Navbar } from "./Navbar";
 import {Home} from  '../Pages/Home'
-import {Loader} from './Loader'
+import {Loader} from './';
 function App() {
   
   const [posts,setPosts] = useState([]);
@@ -12,18 +12,20 @@ let fetchPosts = async ()=>{
   let response = await getPost();
   console.log('response',response);
   if(response.success){
-    setPosts(response.data.post);
+    setPosts(response.data.posts);
+    
   }
+  setloading(false);
 }
 fetchPosts();
 },[])
 if(loading){
-  <Loader />
+  return <Loader />
 }
   return (
     <div className="App">
    <Navbar/>
-   <Home/>
+   <Home posts={posts} />
     </div>
   );
 }
