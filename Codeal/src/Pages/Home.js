@@ -1,4 +1,5 @@
 import React from "react";
+import Comments from "./Comments";
 import PropTypes from 'prop-types';
 import styles from "../Styles/home.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,14 +38,18 @@ export const Home = ({ posts }) => {
           <div>
             <input type="text" placeholder="start typing comments" />
           </div>
-          <div>
-          <ul>
-         
-          </ul>
           </div>
+       <div>
+        {post.comments.map((comment) => (
+          <Comments comments={comment}/>
+        ))}
+       
         </div>
+
         </div>
       ))}
+     
+  
 
 
       </section>
