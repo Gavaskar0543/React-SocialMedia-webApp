@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import styles from "../Styles/home.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -38,9 +39,7 @@ export const Home = ({ posts }) => {
           </div>
           <div>
           <ul>
-           {post.map((comments) => (
-            <li>{comments}</li>
-           ))}
+         
           </ul>
           </div>
         </div>
@@ -52,4 +51,8 @@ export const Home = ({ posts }) => {
    
   );
 };
+
+Home.propTypes = {
+  posts : PropTypes.array.isRequired
+}
 
