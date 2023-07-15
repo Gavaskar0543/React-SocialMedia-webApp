@@ -8,7 +8,7 @@ export const Navbar = () => {
           <h1>codeal</h1>
         </div>
         <div className={styles.space}>
-          <div >signin</div>
+          <div>signin</div>
           <div>signup</div>
         </div>
       </div>
