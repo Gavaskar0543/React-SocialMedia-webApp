@@ -1,8 +1,11 @@
 import { getPost } from "../api";
 import {useEffect,useState} from 'react'
 import { Navbar } from "./Navbar";
-import {Home} from  '../Pages/Home'
+import PageNotFound from "../Pages/pageNotFound";
+import {Home,About,UserInfo} from  '../Pages/Home'
+import  Login  from "../Pages/Login";
 import {Loader} from './';
+import {BrowserRouter as Router,Route,Routes} from 'react-router-dom';
 function App() {
   
   const [posts,setPosts] = useState([]);
@@ -25,7 +28,13 @@ if(loading){
   return (
     <div className="App">
    <Navbar/>
-   <Home posts={posts} />
+   <Routes>
+      <Route path="/" element={<Home posts={posts} />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/userInfo" element={<UserInfo />} />
+      <Route path="/login" element={<Login />} />
+      <Route element={<PageNotFound />} />
+    </Routes>
     </div>
   );
 }

@@ -6,6 +6,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faCommentDots } from '@fortawesome/free-solid-svg-icons';
 
+
+
+export const About = () =>{
+  return (
+    <h1>About</h1>
+  )
+}
+
+export const UserInfo = () =>{
+  return (
+    <h1>UserInfo</h1>
+  )
+}
 export const Home = ({ posts }) => {
   return (
     <section>
