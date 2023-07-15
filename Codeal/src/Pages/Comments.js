@@ -4,7 +4,7 @@ function Comments({comments}) {
     return (
         <div>
            <div>
-            <span>{comments.user.name}</span>
+            <h4 style={commentUser}>{comments.user.name}</h4>
            </div>
            <div>
             <p>{comments.content}</p>
@@ -13,7 +13,10 @@ function Comments({comments}) {
     );
 }
 
-
+const commentUser = {
+    textTransform : 'capitalize',
+ 
+}
 Comments.propTypes ={
     comments : PropTypes.object.isRequired
 }

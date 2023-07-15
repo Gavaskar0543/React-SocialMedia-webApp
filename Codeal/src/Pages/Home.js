@@ -37,6 +37,7 @@ export const Home = ({ posts }) => {
           </div>
           <div>
             <input type="text" placeholder="start typing comments" />
+            <span><button type="submit">send</button></span>
           </div>
           </div>
        <div>
