@@ -1,4 +1,4 @@
-import { getPost } from "../api";
+import { getPosts } from "../api";
 import { useEffect, useState } from "react";
 import { Navbar } from "./Navbar";
 import PageNotFound from "../Pages/pageNotFound";
@@ -11,7 +11,7 @@ function App() {
   const [loading, setloading] = useState(true);
   useEffect(() => {
     let fetchPosts = async () => {
-      let response = await getPost();
+      let response = await getPosts();
       console.log("response", response);
       if (response.success) {
         setPosts(response.data.posts);

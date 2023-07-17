@@ -1,45 +1,43 @@
-import { Local_Storage_TOKEN_KEY } from "../utils/index";
-import { API_URLS } from "../utils/inde";
-let customFetch = async (url, { body, ...customConfig }) => {
+import { API_URLS,Local_Storage_TOKEN_KEY } from '../utils/constants';
+import { getFormBody} from '../utils/index'
+
+const customFetch = async (url, { body, ...customConfig }) => {
   const token = window.localStorage.getItem(Local_Storage_TOKEN_KEY);
-  //header
+
   const headers = {
-    "content-type": "application/json",
-    Accept: "application/json",
+    'content-type': 'application/x-www-form-urlencoded',
   };
-  //if token exist in local storage then add new key to headers as authoriztion
+
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
-  //config
+
   const config = {
-    //including custom config
     ...customConfig,
     headers: {
-      //header contains content and accept
       ...headers,
-      //costomConfig contains an header
       ...customConfig.headers,
     },
   };
-  //if body exits as parameter then create new key in config and store its value using json stringyfy
+
   if (body) {
-    config.body = JSON.stringify(body);
+    config.body = getFormBody(body);
   }
 
   try {
     const response = await fetch(url, config);
     const data = await response.json();
-//if success
+
     if (data.success) {
       return {
         data: data.data,
         success: true,
       };
     }
+
     throw new Error(data.message);
   } catch (error) {
-    console.log(error.message);
+    console.error('error');
     return {
       message: error.message,
       success: false,
@@ -47,9 +45,15 @@ let customFetch = async (url, { body, ...customConfig }) => {
   }
 };
 
-//getpost
-export const getPost = (pages=1, limitOfPost=5) => {
-  return customFetch(API_URLS.posts(pages,limitOfPost),{
-    method :'GET'
+export const getPosts = (page = 1, limit = 5) => {
+  return customFetch(API_URLS.posts(page, limit), {
+    method: 'GET',
+  });
+};
+
+export const login = (email, password) => {
+  return customFetch(API_URLS.login(), {
+    method: 'POST',
+    body: { email, password },
   });
 };
