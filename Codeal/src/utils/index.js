@@ -1,4 +1,29 @@
+export function getAuthTokenFromLocalStorage(key) {
 
+  if(!key){
+    console.log("key not found");
+    return;
+  }
+  return localStorage.getItem(key);
+
+  }
+
+export function setAuthTokenInLocalStorage(key,value) {
+  if(!key || !value){
+    console.log("token not found");
+    return;
+  }
+  const valueToStore = typeof value === 'string' ? value : JSON.stringify(value);
+  localStorage.setItem(valueToStore);
+
+}
+export function removeAuthTokenInLocalStorage(key) {
+  if(!key){
+    console.log("key not found");
+    return;
+  }
+  localStorage.removeItem(key);
+}
 
 export const getFormBody = (params) => {
   let formBody = [];

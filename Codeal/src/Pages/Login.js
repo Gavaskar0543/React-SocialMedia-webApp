@@ -9,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [logging, setLogging] = useState(false);
  const auth = useAuth();
- console.log(auth)
+
   //notification function
   const notify = () => toast("please enter both email and password");
   const loginToast = () => toast("password/email does`nt match");
