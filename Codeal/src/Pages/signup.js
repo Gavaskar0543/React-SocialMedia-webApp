@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 function signup() {
-    return (
-        <div className="container  mt-5 w-25">
+  return (
+    <div className="container  mt-5 w-25">
       <div className="container">
         <h3 className="text-warning text-center">Signup</h3>
-        <form >
+        <form>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -15,7 +15,7 @@ function signup() {
               placeholder="Enter email"
             />
           </div>
-         
+
           <div className="form-group">
             <label htmlFor="Password">Password</label>
             <input
@@ -23,8 +23,6 @@ function signup() {
               id="Password"
               className="form-control"
               placeholder="Enter password"
-             
-             
             />
           </div>
           <div className="form-group">
@@ -34,24 +32,17 @@ function signup() {
               id="Password"
               className="form-control"
               placeholder="Enter password"
-             
             />
-            </div>
+          </div>
           <div>
-            <button
-              type="submit"
-             
-              className="btn btn-warning w-100 mt-2">
-             Create New
+            <button type="submit" className="btn btn-warning w-100 mt-2">
+              Create New
             </button>
-           
           </div>
         </form>
       </div>
     </div>
-
-
-    );
+  );
 }
 
 export default signup;
