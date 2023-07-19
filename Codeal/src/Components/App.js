@@ -4,6 +4,7 @@ import { Navbar } from "./Navbar";
 import PageNotFound from "../Pages/pageNotFound";
 import { Home, About, UserInfo } from "../Pages/Home";
 import Login from "../Pages/Login";
+import Signup from "../Pages/signup";
 import { Loader } from "./";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/userInfo" element={<UserInfo />} />
         <Route path="/login" element={<Login />} />
+        <Route path='/signup' element={<Signup />}/>
         <Route element={<PageNotFound />} />
       </Routes>
     </div>
