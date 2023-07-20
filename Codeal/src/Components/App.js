@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Navbar } from "./Navbar";
 import PageNotFound from "../Pages/pageNotFound";
 import { Home, About, UserInfo } from "../Pages/Home";
+import Setting from "../Pages/Settings";
 import Login from "../Pages/Login";
 import Signup from "../Pages/signup";
 import { Loader } from "./";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/userInfo" element={<UserInfo />} />
         <Route path="/login" element={<Login />} />
         <Route path='/signup' element={<Signup />}/>
+        <Route path='/settings' element={<Setting />}/>
         <Route element={<PageNotFound />} />
       </Routes>
     </div>

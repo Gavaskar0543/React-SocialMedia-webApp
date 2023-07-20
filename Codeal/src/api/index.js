@@ -21,7 +21,7 @@ const customFetch = async (url, { body, ...customConfig }) => {
   };
 
   if (body) {
-    config.body = getFormBody(body);
+    config.body = getFormBody (body);
   }
 
   try {

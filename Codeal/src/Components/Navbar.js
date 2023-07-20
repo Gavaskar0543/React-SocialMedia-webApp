@@ -5,13 +5,24 @@ export const Navbar = () => {
     <>
       <div className={styles.navbar}>
         <div className={styles.logo}>
-         <Link to='/'> <h1>codeal</h1></Link>
+          <Link to="/">
+            {" "}
+            <h1>codeal</h1>
+          </Link>
         </div>
         <div className={styles.space}>
           <div>
+            <Link to="/settings">
+              <img
+                src="https://image.flaticon.com/icons/png/512/174/174857.png"
+                alt="search"
+              />
+            </Link>
+          </div>
+          <div>
             <Link to="/login">Signin</Link>
           </div>
-          <Link to='/signup'>SignUp</Link>
+          <Link to="/signup">SignUp</Link>
         </div>
       </div>
     </>
