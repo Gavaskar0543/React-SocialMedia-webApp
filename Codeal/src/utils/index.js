@@ -14,7 +14,7 @@ export function setAuthTokenInLocalStorage(key,value) {
     return;
   }
   const valueToStore = typeof value === 'string' ? value : JSON.stringify(value);
-  localStorage.setItem(valueToStore);
+  localStorage.setItem(key,valueToStore);
 
 }
 export function removeAuthTokenInLocalStorage(key) {

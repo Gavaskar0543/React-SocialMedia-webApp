@@ -4,10 +4,39 @@ import { useAuth } from "../hooks/index";
 function Settings(props) {
   const auth = useAuth();
   const [editmode, setEditmode] = useState(false);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(auth.user?.name ? auth.user.name : "");
   const[password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [saveingForm, setSavingForm] = useState(false);
+  //update user profile
+  const updateUserprofile = async (e) => {
+    e.preventDefault();
+    setSavingForm(true);
+   let error = false;
+   if(!name ||!password || !confirmPassword){
+      alert("All fields are required");
+      error = true;
+   }
+   if(password !== confirmPassword){
+      alert("Password and confirm password should be same");
+      error = true;
+    }
+    if(error){
+      setSavingForm(false);
+      console.log(error,'error')
+      return;
+    }
+    const response = await auth.updateUserprofile(auth.user._id,name,password,confirmPassword);
+    if(response.success){
+      alert("User updated successfully");
+      setEditmode(false);
+    }
+    else{
+      alert(response.message);
+    }
+
+    setSavingForm(false);
+  }
 
   return (
     <div>
@@ -20,92 +49,85 @@ function Settings(props) {
           />
         </div>
         <br />
-        <div>
-          <form>
-            <div className="mb-3">
-              <label for="exampleInputEmail1" className="form-label">
-                Email address
-              </label>
-              <div>{auth.user.email}</div>
-              <div id="emailHelp" className="form-text">
-                We'll never share your email with anyone else.
-              </div>
+    <div>
+      <div>
+        <form>
+          <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Email address
+            </label>
+            <div>{auth.user?.email}</div>
+            <div id="emailHelp" className="form-text">
+              We'll never share your email with anyone else.
             </div>
-            <div>
-              <label for="exampleInputPassword1" className="form-label">
-                Username
-              </label>
+          </div>
+          <div>
+            <label htmlFor="exampleInputUsername" className="form-label">
+              Username
+            </label>
+            {editmode ? (
               <input
                 type="text"
                 className="form-control"
-                id="exampleInputPassword1"
                 value={name}
+                id="exampleInputUsername"
                 onChange={(e) => setName(e.target.value)}
               />
-              {editmode ? (
-                <input
-                  type="text"
-                  className="form-control"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              ) : (
-                <div>{auth.user.name}</div>
-              )}
-              ;
-            </div>
-            {editmode && (
-              <>
-                <div className="mb-3">
-              <label for="exampleInputPassword1" className="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                className="form-control"
-               value={password}
-                onChange={(e) => setPassword(e.target.value)}
-               id="exampleInputPassword1"
-              />
-            </div>
-            <div className="mb-3">
-              <label for="exampleInputPassword1" className="form-label">
-                Confirm password
-              </label>
-              <input
-                type="password"
-                value={confirmPassword}
-                className="form-control"
-                id="exampleInputPassword1"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-              </>
+            ) : (
+              <div>{auth.user.name}</div>
             )}
-          
-            <div className="d-flex  justify-content-evenly">
-             
-              {editmode ? (
+          </div>
+          {editmode && (
             <>
-            <button type="submit" className="btn btn-outline-success">
-                {saveingForm ? "Saving..." : "Save"}
-              </button>
-              <Link to="/">
-                <button onClick={() => setEditmode(false)} type="submit" className="btn btn-outline-danger">
-                  GoBack
-                </button>
-              </Link>
+              <div className="mb-3">
+                <label htmlFor="exampleInputPassword1" className="form-label">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  id="exampleInputPassword1"
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="exampleInputConfirmPassword1" className="form-label">
+                  Confirm password
+                </label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  className="form-control"
+                  id="exampleInputConfirmPassword1"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
             </>
-        ):(  <button onClick={() => setEditmode(true)} type="submit" className="btn btn-outline-primary">
-        Edit Details
-      </button> )}
-              
-            </div>
-          </form>
+          )}
+        </form>
+        <div className="d-flex justify-content-evenly">
+          {editmode ? (
+            <>
+              <button className="btn btn-outline-success" onClick={updateUserprofile} disabled={saveingForm}>
+                {saveingForm ? 'Saving...' : 'Save'}
+              </button>
+              <button onClick={() => setEditmode(false)} className="btn btn-outline-danger">
+                GoBack
+              </button>
+            </>
+          ) : (
+            <button onClick={() => setEditmode(true)} className="btn btn-outline-primary">
+              Edit Details
+            </button>
+          )}
         </div>
       </div>
     </div>
+
+      </div>
+    </div>
   );
-}
+};
 
 export default Settings;

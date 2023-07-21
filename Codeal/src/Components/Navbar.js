@@ -37,7 +37,7 @@ const Navbar = () => {
           <ul>
             {auth.user ? (
               <>
-                <li onClick={auth.logout}>Log out</li>
+              <a href='/'>  <li onClick={auth.logout}>Log out</li></a>
               </>
             ) : (
               <>
@@ -45,7 +45,7 @@ const Navbar = () => {
                   <Link to="/login">Log in</Link>
                 </li>
                 <li>
-                  <Link to="/register">Register</Link>
+                  <Link to="/signup">Register</Link>
                 </li>
               </>
             )}

@@ -36,7 +36,7 @@ const Signup = () => {
     const response = await auth.signup(name, email, password, confirmPassword);
 
     if (response.success) {
-      navigate.push('/login');
+    
       setSigningUp(false);
 
     

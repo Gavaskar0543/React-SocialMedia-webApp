@@ -5,7 +5,7 @@ import { AuthContext } from '../Providers/index';
 import { login as userLogin } from '../api';
 import { setAuthTokenInLocalStorage,removeAuthTokenInLocalStorage} from '../utils';
 import { Local_Storage_TOKEN_KEY } from '../utils/constants';
-import { register } from '../api';
+import { register,editUser } from '../api';
 export const useAuth = () => {
   return useContext(AuthContext);
 };
@@ -53,6 +53,26 @@ export const useProvideAuth = () => {
       };
     }
   };
+  const updateUserprofile = async (userId,name,password ,confirmPassword) => {
+    const response = await editUser(userId,name,password ,confirmPassword);
+    console.log(response,'response');
+    if(response.success){
+      setUser(response.data.user);
+       setAuthTokenInLocalStorage(Local_Storage_TOKEN_KEY,response.data.token ? response.data.token : null);
+      return {
+        success: true,
+      }
+    }
+    else{
+      return {
+        success: false,
+        message: response.message,
+
+      }
+     
+    }
+
+  };
 
   const logout = () => {
     setUser(null);
@@ -64,6 +84,7 @@ export const useProvideAuth = () => {
     login,
     logout,
     loading,
-    signup
+    signup,
+    updateUserprofile
   };
 };
