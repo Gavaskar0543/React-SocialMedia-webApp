@@ -1,31 +1,27 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { useAuth } from '../hooks';
-import styles from '../Styles/login.module.css';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks";
+import styles from "../Styles/login.module.css";
 
 const Signup = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [signingUp, setSigningUp] = useState('');
- 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [signingUp, setSigningUp] = useState("");
+
   const auth = useAuth();
- const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setSigningUp(true);
 
     let error = false;
     if (!name || !email || !password || !confirmPassword) {
-     
       error = true;
     }
 
     if (password !== confirmPassword) {
-    
-
       error = true;
     }
 
@@ -36,17 +32,16 @@ const Signup = () => {
     const response = await auth.signup(name, email, password, confirmPassword);
 
     if (response.success) {
-    
       setSigningUp(false);
-
-    
     } else {
-     
     }
 
     setSigningUp(false);
   };
-
+  if (auth.user) {
+    navigate("/");
+    return null;
+  }
   return (
     <form className={styles.loginForm} onSubmit={handleFormSubmit}>
       <span className={styles.loginSignupHeader}> Signup</span>
@@ -89,7 +84,7 @@ const Signup = () => {
       </div>
       <div className={styles.field}>
         <button disabled={signingUp}>
-          {signingUp ? 'Signing up...' : 'Signup'}
+          {signingUp ? "Signing up..." : "Signup"}
         </button>
       </div>
     </form>

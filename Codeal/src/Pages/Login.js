@@ -1,21 +1,21 @@
-import { useState } from 'react';
-
-import styles from '../Styles/login.module.css';
-import { useAuth } from '../hooks';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "../Styles/login.module.css";
+import { useAuth } from "../hooks";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
   const auth = useAuth();
-  console.log(auth);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoggingIn(true);
 
     if (!email || !password) {
-      alert('Please fill all the fields');
+      alert("Please fill all the fields");
       setLoggingIn(false);
       return;
     }
@@ -23,14 +23,15 @@ const Login = () => {
     const response = await auth.login(email, password);
 
     if (response.success) {
-      
     } else {
-      
     }
 
     setLoggingIn(false);
   };
-
+  if (auth.user) {
+    navigate("/");
+    return null;
+  }
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit}>
       <span className={styles.loginSignupHeader}>Log In</span>
@@ -55,7 +56,7 @@ const Login = () => {
 
       <div className={styles.field}>
         <button disabled={loggingIn}>
-          {loggingIn ? 'Logging in...' : 'Log In'}
+          {loggingIn ? "Logging in..." : "Log In"}
         </button>
       </div>
     </form>
