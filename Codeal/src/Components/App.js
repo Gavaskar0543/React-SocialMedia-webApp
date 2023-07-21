@@ -1,11 +1,11 @@
 import { getPosts } from "../api";
 import { useEffect, useState } from "react";
-import { Navbar } from "./Navbar";
+import  Navbar  from "./Navbar";
 import PageNotFound from "../Pages/pageNotFound";
 import { Home, About, UserInfo } from "../Pages/Home";
 import Setting from "../Pages/Settings";
 import Login from "../Pages/Login";
-import Signup from "../Pages/signup";
+import Signup from "../Pages/Signup";
 import { Loader } from "./";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
