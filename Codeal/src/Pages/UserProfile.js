@@ -1,8 +1,40 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../hooks/index";
+import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../Components/Loader";
+import { useParams } from "react-router-dom";
+import { userProfileInfo } from "../api";
 function UserProfile(props) {
-const user = {};
+const {userId} = useParams();
+const[ user, setUser] = useState({});
+const [loading,setLoading] = useState(true);
+console.log(userId, "userId");
+const notySuccess = () =>toast.success('user fonund', {
+  position: "top-center",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "colored",
+  });
+
+useEffect(() => {
+  const getUser = async () => {
+    const response = await userProfileInfo(userId);
+    if(response.success){
+      notySuccess();
+      setUser(response.data.user);
+      setLoading(false);
+    }
+    setLoading(false);
+  };
+  getUser()
+}  ,[]);
+if(loading){
+  return <Loader />
+}
   return (
     <div>
       <div className="container d-flex-column w-50 justify-content-center align-item-center border border-1">
@@ -16,8 +48,15 @@ const user = {};
         <br />
     
        
-        <div className="d-flex justify-content-evenly">
-          
+        <div className="d-flex-column justify-content-evenly">
+          <div className="d-flex flex-column">
+            <h5 className="text-primary">Name</h5>
+            <p>{user.name}</p>
+            <h5 className="text-primary">Email</h5>
+            <p>{user.email}</p>
+          </div>
+          <ToastContainer />
+          <div>
               <button className="btn btn-outline-danger">
                 Add Friend
               </button>
@@ -25,7 +64,7 @@ const user = {};
             <button  className="btn btn-outline-primary">
              Remove Friend
             </button>
-          
+            </div>
         </div>
       </div>
     </div>

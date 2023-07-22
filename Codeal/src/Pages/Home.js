@@ -35,7 +35,10 @@ export const Home = ({ posts }) => {
               />
             </div>
             <div>
-         <Link to={`/user/${post.user._id}`}>     <h4>{post.user.name}</h4> </Link>
+         <Link to={{
+          pathname: `/user/${post.user._id}`,
+          state: { user:"testing" },
+         }}>     <h4>{post.user.name}</h4> </Link>
             </div>
           </div>
           <div>{post.content}</div>
