@@ -5,8 +5,7 @@ import styles from "../Styles/home.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faCommentDots } from '@fortawesome/free-solid-svg-icons';
-
-
+import { Link } from "react-router-dom";
 
 export const About = () =>{
   return (
@@ -36,7 +35,7 @@ export const Home = ({ posts }) => {
               />
             </div>
             <div>
-              <h4>{post.user.name}</h4>
+         <Link to={`/user/${post.user._id}`}>     <h4>{post.user.name}</h4> </Link>
             </div>
           </div>
           <div>{post.content}</div>
