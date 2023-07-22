@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../Styles/login.module.css";
 import { useAuth } from "../hooks";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +17,7 @@ const Login = () => {
     setLoggingIn(true);
 
     if (!email || !password) {
-      alert("Please fill all the fields");
+      notyWarn();
       setLoggingIn(false);
       return;
     }
@@ -23,11 +25,45 @@ const Login = () => {
     const response = await auth.login(email, password);
 
     if (response.success) {
+          notySuccess();
     } else {
+      notyError();
     }
 
     setLoggingIn(false);
   };
+
+  const notyWarn = () =>toast.warning('Please Fill required Fields', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+  const notyError = () =>toast.error('Please check the Details', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+  const notySuccess = () =>toast.success('Logged in', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
   if (auth.user) {
     navigate("/");
     return null;
@@ -35,7 +71,7 @@ const Login = () => {
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit}>
       <span className={styles.loginSignupHeader}>Log In</span>
-
+      <ToastContainer />
       <div className={styles.field}>
         <input
           type="email"
@@ -55,7 +91,7 @@ const Login = () => {
       </div>
 
       <div className={styles.field}>
-        <button disabled={loggingIn}>
+        <button  disabled={loggingIn}>
           {loggingIn ? "Logging in..." : "Log In"}
         </button>
       </div>

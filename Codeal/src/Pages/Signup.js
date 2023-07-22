@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks";
 import styles from "../Styles/login.module.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -32,7 +34,9 @@ const Signup = () => {
     const response = await auth.signup(name, email, password, confirmPassword);
 
     if (response.success) {
+     
       setSigningUp(false);
+
     } else {
     }
 
@@ -45,6 +49,7 @@ const Signup = () => {
   return (
     <form className={styles.loginForm} onSubmit={handleFormSubmit}>
       <span className={styles.loginSignupHeader}> Signup</span>
+      <ToastContainer/>
       <div className={styles.field}>
         <input
           placeholder="Name"
